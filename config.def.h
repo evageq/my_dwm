@@ -110,6 +110,7 @@ static const Key keys[] = {
     { 0,                       XF86XK_AudioMute, spawn, {.v = mutevol } },
     { 0,				XF86XK_MonBrightnessUp,		spawn,	{.v = light_up} },
 	{ 0,				XF86XK_MonBrightnessDown,	spawn,	{.v = light_down} },
+	{ MODKEY,                       XK_s,      togglesticky,   {0} },
 };
 
 /* button definitions */
