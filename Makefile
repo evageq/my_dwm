@@ -14,7 +14,7 @@ all:
 
 ${OBJ}: config.h config.mk
 
-config.h:
+config.h: FORCE
 	cp config.def.h $@
 
 dwm: ${OBJ}
@@ -44,4 +44,6 @@ uninstall:
 	rm -f ${DESTDIR}${PREFIX}/bin/dwm\
 		${DESTDIR}${MANPREFIX}/man1/dwm.1
 
-.PHONY: all clean dist install uninstall
+FORCE:
+
+.PHONY: all clean dist install uninstall FORCE
