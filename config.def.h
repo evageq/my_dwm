@@ -114,6 +114,7 @@ static const Key keys[] = {
     { 0,				XF86XK_MonBrightnessUp,		spawn,	{.v = light_up} },
 	{ 0,				XF86XK_MonBrightnessDown,	spawn,	{.v = light_down} },
 	{ MODKEY,                       XK_s,      togglesticky,   {0} },
+	{ MODKEY|ControlMask|ShiftMask, XK_q,      quit,           {1} }, 
 };
 
 /* button definitions */
