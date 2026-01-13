@@ -118,6 +118,7 @@ static const Key keys[] = {
 	{ 0,				XF86XK_MonBrightnessDown,	spawn,	{.v = light_down} },
 	{ MODKEY,                       XK_s,      togglesticky,   {0} },
 	{ MODKEY|ControlMask|ShiftMask, XK_q,      quit,           {1} }, 
+    { Mod1Mask, XK_Shift_L,      spawn,           SHCMD("$HOME/scripts/xlayout") }, 
 };
 
 /* button definitions */
