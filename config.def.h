@@ -66,10 +66,6 @@ static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() 
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { "kitty", NULL };
 static const char *clipboardcmd[]  = { "clipmenu", NULL };
-static const char *upvol[]      = { "wpctl",   "set-volume", "-l", "1", "@DEFAULT_AUDIO_SINK@", "5%+", NULL };
-static const char *downvol[]      = { "wpctl",   "set-volume", "@DEFAULT_AUDIO_SINK@", "5%-", NULL };
-static const char *mutevol[]    = { "wpctl",   "set-mute",   "@DEFAULT_AUDIO_SINK@",  "toggle",   NULL };
-
 static const char *light_up[]   = { "brightnessctl",  "-e4", "-n2", "set", "5%+", NULL };
 static const char *light_down[] = { "brightnessctl",  "-e4", "-n2", "set", "5%-", NULL };
 
@@ -111,11 +107,11 @@ static const Key keys[] = {
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
-	{ 0,				XF86XK_AudioLowerVolume,spawn,{.v = downvol } },	
-	{ 0,				XF86XK_AudioRaiseVolume,spawn,{.v = upvol } },
-    { 0,                       XF86XK_AudioMute, spawn, {.v = mutevol } },
-    { 0,				XF86XK_MonBrightnessUp,		spawn,	{.v = light_up} },
-	{ 0,				XF86XK_MonBrightnessDown,	spawn,	{.v = light_down} },
+	{ 0,				XF86XK_AudioLowerVolume,spawn, SHCMD("wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%-; kill -44 $(pidof dwmblocks)")},	
+	{ 0,				XF86XK_AudioRaiseVolume,spawn, SHCMD("wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+; kill -44 $(pidof dwmblocks)") },
+    { 0,                       XF86XK_AudioMute, spawn, SHCMD("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle; kill -44 $(pidof dwmblocks)") },
+    { 0,				XF86XK_MonBrightnessUp,		spawn,	SHCMD("brightnessctl -e4 -n2 set 5%+; kill -45 $(pidof dwmblocks)") },
+	{ 0,				XF86XK_MonBrightnessDown,	spawn,	SHCMD("brightnessctl -e4 -n2 set 5%-; kill -45 $(pidof dwmblocks)") },
 	{ MODKEY,                       XK_s,      togglesticky,   {0} },
 	{ MODKEY|ControlMask|ShiftMask, XK_q,      quit,           {1} }, 
     { Mod1Mask, XK_Shift_L,      spawn,           SHCMD("$HOME/scripts/xlayout") }, 
